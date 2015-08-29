@@ -1,0 +1,13 @@
+bower_components
+node_modules
+publish
+.hg
+
+*.apk
+*.keystore
+
+*.orig
+*~
+*.swp
+*.sublime-project
+*.sublime-workspace

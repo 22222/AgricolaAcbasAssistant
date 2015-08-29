@@ -1,0 +1,12 @@
+syntax: glob
+
+bower_components
+node_modules
+dist
+.git
+
+*.orig
+*~
+*.swp
+*.sublime-project
+*.sublime-workspace

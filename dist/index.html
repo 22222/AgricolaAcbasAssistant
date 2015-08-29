@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <title>Agricola All Creatures Big and Small Scorecard</title>    
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="bundle.min.css" />
+</head>
+<body>
+     <!-- ko pageTitle: messages.title --><!-- /ko-->
+
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <p class="navbar-text title" data-bind="text: messages.shortTitle"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main container" style="display: none" data-bind="visible: isLoaded">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><i class="icon-player-red icon-large"></i></th>
+                    <th><i class="icon-player-blue icon-large"></i></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: categories -->
+                <tr>
+                    <th class="rowLabel">
+                        <i data-bind="attr: { 'class': 'icon-' + iconName + ' icon-large' }"></i>
+                    </th>
+                    <!-- ko foreach: $root.players -->
+                    <td data-bind="with: getScoreModelForCategory($parent.id)">
+                        <div class="input-prepend input-append">
+                            <button class="btn" data-bind="click: decrement, disable: isDecrementDisabled" tabindex="-1"><i class="icon-minus"></i></button>
+                            <input class="input-mini" type="number" min="0" max="99" step="1" data-bind="value: count, valueUpdate: 'afterkeydown', attr: { min: category.min, max: category.max }" />
+                            <button class="btn" data-bind="click: increment, disable: isIncrementDisabled" tabindex="-1"><i class="icon-plus"></i></button>
+                        </div>
+                        <!-- ko if: $root.isScoreDetailShown -->
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-exclamation-sign"></i></span>
+                            <span class="uneditable-input input-mini" data-bind="text: score"></span>
+                            <span class="add-on" style="visibility:hidden"></span>
+                        </div>
+                        <!-- /ko -->
+                    </td>
+                    <!-- /ko -->
+                </tr>
+                <!-- /ko -->
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="rowLabel">&sum;</th>
+                    <!-- ko foreach: players -->
+                    <td>
+                        <span data-bind="text: scoreTotal"></span>
+                    </td>
+                    <!-- /ko -->
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="button-group">
+            <button class="btn" data-bind="click: toggleScoreDetailShown, css: { 'active': isScoreDetailShown}"><i class="icon-eye-open"></i> <span data-bind="text: messages.details"></span></button>
+            <button class="btn btn-danger" data-bind="click: clear"><i class="icon-remove-sign icon-white"></i> <span data-bind="text: messages.clear"></span></button>
+        </div>
+    </div>
+
+    <div class="container" data-bind="ifnot: isLoaded">
+        <p>
+            <img src="images/ajax-loader.gif" />
+        </p>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="bundle.min.js"></script>
+</body>
+</html>
