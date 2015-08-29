@@ -47,7 +47,7 @@ gulp.task('copy-phonegap', function() {
 });
 
 gulp.task('copy', function() {
-    gulp.start('copy-bower', 'copy-phonegap');
+    gulp.start('copy-bower');
 });
 
 gulp.task('build-html', function() {

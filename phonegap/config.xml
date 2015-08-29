@@ -10,24 +10,30 @@
 
     <description>A scorecard for the game Agricola All Creatures Big and Small.</description>
 
-    <preference name="permissions"                value="none"/>
+    <preference name="permissions" value="none"/>
 
     <!-- Customize your app and platform with the preference element. -->
-    <preference name="orientation"                value="default" />        <!-- all: default means both landscape and portrait are enabled -->
-    <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
-    <preference name="fullscreen"                 value="true" />           <!-- all: hides the status bar at the top of the screen -->
+
+    <!-- all: default means both landscape and portrait are enabled -->
+    <preference name="orientation" value="default" />
+
+    <!-- all: possible values handset, tablet, or universal -->
+    <preference name="target-device" value="universal" />
+
+    <!-- all: hides the status bar at the top of the screen -->
+    <preference name="fullscreen" value="true" />
 
     <!-- Plugins -->
     <gap:plugin name="org.apache.cordova.globalization" />
 
     <!-- Define app icon for each platform. -->
-    <icon src="icon.png" />
-    <icon src="icon/icon-36-ldpi.png"  gap:platform="android" gap:qualifier="ldpi" />
-    <icon src="icon/icon-48-mdpi.png"  gap:platform="android" gap:qualifier="mdpi" />
-    <icon src="icon/icon-72-hdpi.png"  gap:platform="android" gap:qualifier="hdpi" />
-    <icon src="icon/icon-96-xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
-    <icon src="icon/icon-72-hdpi.png"  gap:platform="ios" width="72" height="72" />
-    <icon src="icon/icon-48-mdpi.png"  gap:platform="winphone" />
+    <icon src="res/icon-96-xhdpi.png" />
+    <icon src="res/icon/icon-36-ldpi.png"  gap:platform="android" gap:qualifier="ldpi" />
+    <icon src="res/icon/icon-48-mdpi.png"  gap:platform="android" gap:qualifier="mdpi" />
+    <icon src="res/icon/icon-72-hdpi.png"  gap:platform="android" gap:qualifier="hdpi" />
+    <icon src="res/icon/icon-96-xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+    <icon src="res/icon/icon-72-hdpi.png"  gap:platform="ios" width="72" height="72" />
+    <icon src="res/icon/icon-48-mdpi.png"  gap:platform="winphone" />
 
     <access origin="*"/>
     <allow-intent href="http://*/*" />
