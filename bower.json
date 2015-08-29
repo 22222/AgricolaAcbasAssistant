@@ -1,0 +1,20 @@
+{
+  "name": "AgricolaAcbasAssistant",
+  "version": "0.0.0",
+  "main": "index.html",
+  "license": "GPL-3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3",
+    "deferred-js": "~1",
+    "fontawesome": "~4",
+    "knockout": "~3",
+    "underscore": "~1"
+  }
+}
