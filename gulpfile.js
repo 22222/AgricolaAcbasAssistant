@@ -16,10 +16,8 @@ gulp.task('copy-bower-js', function() {
         'bower_components/underscore/underscore-min.js',
         'bower_components/deferred-js/js/deferred.min.js',
         'bower_components/knockout/dist/knockout.js'
-        //'bower_components/jquery/dist/jquery.min.js',
-        //'bower_components/bootstrap/dist/js/bootstrap.min.js'
     ])
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('www/js'))
 });
 gulp.task('copy-bower-css', function() {
   return gulp.src([
@@ -27,69 +25,63 @@ gulp.task('copy-bower-css', function() {
         'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
         'bower_components/fontawesome/css/font-awesome.min.css'
     ])
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('www/css'))
 });
 gulp.task('copy-bower-fonts', function() {
   return gulp.src([
         'bower_components/fontawesome/fonts/*.*'
     ])
-    .pipe(gulp.dest('dist/fonts'))
+    .pipe(gulp.dest('www/fonts'))
 });
-gulp.task('copy-bower', function() {
-    gulp.start('copy-bower-js', 'copy-bower-css', 'copy-bower-fonts');
-});
+gulp.task('copy-bower', ['copy-bower-js', 'copy-bower-css', 'copy-bower-fonts']);
 
-gulp.task('copy-phonegap', function() {
-  gulp.src(['phonegap/config.xml'])
-    .pipe(gulp.dest('dist'));
-  gulp.src(['phonegap/res/icon/*.png'])
-    .pipe(gulp.dest('dist/res/icon'));
-});
-
-gulp.task('copy', function() {
-    gulp.start('copy-bower');
-});
+gulp.task('copy', ['copy-bower']);
 
 gulp.task('build-html', function() {
   return gulp.src('src/*.html')
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('www'))
 });
 gulp.task('build-scripts', function() {
   return gulp.src('src/js/**/*.js')
     .pipe(concat('site.js'))
-    //.pipe(gulp.dest('dist/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('www/js'));
 });
 gulp.task('build-styles', function() {
   return gulp.src('src/css/**/*.css')
     .pipe(concat('site.css'))
     .pipe(autoprefixer('last 2 version'))
-    //.pipe(gulp.dest('dist/css'))
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('www/css'))
 });
 gulp.task('build-images', function() {
   return gulp.src('src/images/**/*')
     .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
-    .pipe(gulp.dest('dist/images'));
+    .pipe(gulp.dest('www/images'));
 });
-gulp.task('build', function() {
-    gulp.start('build-html', 'build-scripts', 'build-styles', 'build-images');
+gulp.task('build', ['build-html', 'build-scripts', 'build-styles', 'build-images']);
+
+gulp.task('copyBuild', ['copy'], function() {
+    return gulp.start('build');
+});
+
+gulp.task('package-cordova', function() {
+    return gulp.src('www/**/*')
+        .pipe(gulp.dest('cordova/www'));
 });
 
 gulp.task('clean', function(cb) {
-    del(['dist'], cb)
+    return del(['www', 'cordova/www'], cb)
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['build'], function() {
   gulp.watch('src/**/*.html', ['build-html']);
   gulp.watch('src/**/*.js', ['build-scripts']);
   gulp.watch('src/**/*.css', ['build-styles']);
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('copy', 'build');
+    return gulp.start('copyBuild');
 });

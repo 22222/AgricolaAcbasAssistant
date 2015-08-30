@@ -2,7 +2,11 @@ syntax: glob
 
 bower_components
 node_modules
-dist
+www
+cordova/platforms
+cordova/plugins
+cordova/hooks
+cordova/www
 .git
 
 *.orig
