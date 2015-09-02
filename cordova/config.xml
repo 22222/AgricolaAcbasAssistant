@@ -4,7 +4,7 @@
         id        = "com.twotwotwotwo.agricola2p"
         version   = "2.0"
         android-versionName = "2.0"
-        android-versionCode = "3"
+        android-versionCode = "38"
     >
     <name>Agricola All Creatures Big and Small Scorecard</name>
     <description>A scorecard for the game Agricola All Creatures Big and Small.</description>
